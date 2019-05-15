@@ -56,9 +56,33 @@ T = 86164.1
 R = radio(a_1, T)
 V = (4/3)*np.pi*R**3
 
-print("Velocidad de la Tierra", a_1)
-print("Radio de la Tierra", R)
-print("Volumen de la Tierra", V)
+########################ERRORES######################################
+
+##Error angulo horario##
+
+def err_v(t):
+	b=15*np.pi/180*(1/60)
+	return b
+
+h_erro=np.array([err_v(9.383), err_v(10.15), err_v(10.9), err_v(11.65), err_v(12.43), err_v(12.65), err_v(12.85), err_v(12.983)])
+
+
+##Error radio tierra###
+
+def error_radio(v,t,err_v):
+	return (t/(2*np.pi))*(err_v)
+
+R_err=error_radio(a_1, T, e_a1)
+
+##Error volumen tierra###
+
+V_err=4*np.pi*(R**2)*R_err 
+
+
+print("Velocidad de la Tierra:", a_1, u"\u00B1", e_a1)
+print("Radio de la Tierra:", R, u"\u00B1", R_err)
+print("Volumen de la Tierra:", V, u"\u00B1", V_err)
+
 
 
 
